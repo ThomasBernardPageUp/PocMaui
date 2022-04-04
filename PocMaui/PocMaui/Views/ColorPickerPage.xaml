@@ -10,13 +10,16 @@
         <Frame
             BackgroundColor="{Binding FrameColor, Mode=TwoWay}"
             HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"/>
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="200"
+            HeightRequest="200"/>
 
         <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding HexaCode}"></Label>
+                    <StackLayout BackgroundColor="{Binding HexaCode}" Orientation="Horizontal" Margin="10" Padding="20">
+                        <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}"/>
+                        <Label VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

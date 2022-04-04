@@ -3,6 +3,7 @@ using PocMaui.Repositories;
 using PocMaui.Repositories.Interfaces;
 using PocMaui.Services.Interfaces;
 using PocMaui.ViewModels.Base;
+using System.Collections.ObjectModel;
 
 namespace PocMaui.ViewModels
 {
@@ -69,8 +70,8 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region Colors
-        private List<ColorEntity> _colors;
-        public List<ColorEntity> Colors
+        private ObservableCollection<ColorEntity> _colors;
+        public ObservableCollection<ColorEntity> Colors
         {
             get => _colors;
             set
@@ -90,7 +91,8 @@ namespace PocMaui.ViewModels
         {
             var colorEntity = new ColorEntity("test", FrameColor.ToHex());
 
-            var colorName = await Application.Current.MainPage.DisplayPromptAsync("Information", "Enter your color name");
+            // var colorName = await Application.Current.MainPage.DisplayPromptAsync("Information", "Enter your color name");
+            var colorName = "color";
 
             colorEntity.Name = colorName;
 
@@ -100,7 +102,7 @@ namespace PocMaui.ViewModels
 
         public async Task LoadColors()
         {
-            Colors = await _colorService.GetColorsDatabaseAsync();
+            Colors = new ObservableCollection<ColorEntity>(await _colorService.GetColorsDatabaseAsync());
         }
         #endregion
     }
