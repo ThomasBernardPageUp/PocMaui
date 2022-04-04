@@ -22,11 +22,6 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView HeightRequest="40">
-                        <SwipeView.LeftItems>
-                            <SwipeItems>
-                                <SwipeItem IconImageSource="trash.png" BackgroundColor="Red" Text="Delete" Command="{Binding BindingContext.DeleteColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
                         <Grid BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -43,6 +38,11 @@
                                 <TapGestureRecognizer  Command="{Binding BindingContext.SelectColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
                         </Grid>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem IconImageSource="trash.png" BackgroundColor="Red" Text="Delete" Command="{Binding BindingContext.DeleteColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
