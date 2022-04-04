@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocMaui", "PocMaui\PocMaui.csproj", "{665E99BF-F535-4BC0-A880-9DF3DE2D0A1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocMaui.Models", "PocMaui.Models\PocMaui.Models.csproj", "{354D53B2-86BD-473B-AE5F-A530632A99E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{665E99BF-F535-4BC0-A880-9DF3DE2D0A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665E99BF-F535-4BC0-A880-9DF3DE2D0A1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{665E99BF-F535-4BC0-A880-9DF3DE2D0A1C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{354D53B2-86BD-473B-AE5F-A530632A99E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354D53B2-86BD-473B-AE5F-A530632A99E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354D53B2-86BD-473B-AE5F-A530632A99E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354D53B2-86BD-473B-AE5F-A530632A99E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

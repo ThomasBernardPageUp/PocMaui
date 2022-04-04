@@ -29,5 +29,9 @@
             <Label Text="Blue : "/>
             <Slider Minimum="0" Maximum="255" Value="{Binding BlueSliderValue}"/>
         </StackLayout>
+
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+            <Button Text="Save" Command="{Binding SaveColorCommand}"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

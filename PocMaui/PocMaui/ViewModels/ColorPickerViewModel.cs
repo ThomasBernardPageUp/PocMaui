@@ -1,13 +1,22 @@
-﻿using PocMaui.ViewModels.Base;
+﻿using PocMaui.Models.Entities;
+using PocMaui.Repositories;
+using PocMaui.Repositories.Interfaces;
+using PocMaui.ViewModels.Base;
 
 namespace PocMaui.ViewModels
 {
     public class ColorPickerViewModel : BaseViewModel
     {
+        #region Privates
+        private readonly IRepository<ColorEntity> _colorRepository;
+        #endregion
 
         #region CTOR
         public ColorPickerViewModel()
         {
+            _colorRepository = Services.ServiceProvider.GetService<IRepository<ColorEntity>>();
+            this.SaveColorCommand = new Command(async () => await OnSaveColorCommand());
+            _colorRepository = new Repository<ColorEntity>();
         }
         #endregion
 
@@ -52,8 +61,21 @@ namespace PocMaui.ViewModels
             }
         }
 
-        public Color FrameColor  => Color.FromRgb(RedSliderValue, GreenSliderValue, BlueSliderValue);  
+        public Color FrameColor  => Color.FromRgb(RedSliderValue, GreenSliderValue, BlueSliderValue);
         #endregion
 
+        #region Methods
+        public Command SaveColorCommand { get; set; }
+        public async Task OnSaveColorCommand()
+        {
+            var colorEntity = new ColorEntity("test", FrameColor.ToHex());
+
+            var colorName = await Application.Current.MainPage.DisplayPromptAsync("Information", "Enter your color name");
+
+            colorEntity.Name = colorName;
+
+            _colorRepository.Insert(colorEntity);
+        }
+        #endregion
     }
 }
