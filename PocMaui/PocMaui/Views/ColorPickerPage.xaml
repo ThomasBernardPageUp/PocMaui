@@ -64,8 +64,13 @@
             <Slider Minimum="0" Maximum="255" Value="{Binding BlueSliderValue}"/>
         </StackLayout>
 
-        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-            <Button Text="Save" Command="{Binding SaveColorCommand}"/>
+        <StackLayout VerticalOptions="End" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+            <Label Margin="0, 0, 30, 0" VerticalOptions="Center" Text="Generate colors">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GenerateColorsCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Button Text="Save this color" Command="{Binding SaveColorCommand}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

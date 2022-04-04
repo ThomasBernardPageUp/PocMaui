@@ -7,8 +7,7 @@ public partial class ColorPickerPage : ContentPage
 	public ColorPickerPage()
 	{
 		// Use ColorPickerViewModel to bind
-		this.BindingContext = new ColorPickerViewModel();
-
+		this.BindingContext = new ColorPickerViewModel(Navigation);
 		InitializeComponent();
 	}
 }

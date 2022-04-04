@@ -14,13 +14,14 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region CTOR
-        public ColorPickerViewModel()
+        public ColorPickerViewModel(INavigation navigation):base(navigation)
         {
             _colorService = Services.ServiceProvider.GetService<IColorService>();
             SaveColorCommand = new Command(async () => await OnSaveColorCommand());
             DeleteColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnDeleteColorCommand(color));
             ResetHistoryCommand = new Command(async () => await OnResetHistoryCommand());
             SelectColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnSelectColorCommand(color));
+            GenerateColorsCommand = new Command(async () => await OnGenerateColorsCommand());
 
             LoadColors();
         }
@@ -93,6 +94,14 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region Methods
+
+        #region GenerateColorsCommand => OnGenerateColorsCommand
+        public Command GenerateColorsCommand { get; set; }
+        public async Task OnGenerateColorsCommand()
+        {
+            await Navigation.PushAsync(new ColorGeneratorPage());
+        }
+        #endregion
 
         #region DeleteColorCommand => OnDeleteColorCommand
         public Command<ColorEntity> DeleteColorCommand { get; set; }
