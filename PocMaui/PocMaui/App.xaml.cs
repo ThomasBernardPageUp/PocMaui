@@ -1,4 +1,6 @@
-﻿namespace PocMaui;
+﻿using PocMaui.Views;
+
+namespace PocMaui;
 
 public partial class App : Application
 {

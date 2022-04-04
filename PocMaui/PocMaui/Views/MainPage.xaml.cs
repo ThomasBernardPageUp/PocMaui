@@ -1,4 +1,4 @@
-﻿namespace PocMaui;
+﻿namespace PocMaui.Views;
 
 public partial class MainPage : ContentPage
 {
