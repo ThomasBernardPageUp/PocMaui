@@ -35,5 +35,4 @@ namespace PocMaui.Services
             return default(T);
         }
     }
-    }
 }
