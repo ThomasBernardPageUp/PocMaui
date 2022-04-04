@@ -145,6 +145,7 @@ namespace PocMaui.ViewModels
             Colors = new ObservableCollection<ColorEntity>(await _colorService.GetColorsDatabaseAsync());
         }
         #endregion
+
         #endregion
     }
 }

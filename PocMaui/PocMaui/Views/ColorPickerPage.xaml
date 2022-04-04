@@ -12,12 +12,13 @@
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             WidthRequest="200"
-            HeightRequest="200"/>
+            HeightRequest="200"
+            CornerRadius="200"/>
 
         <StackLayout>
             <Button Command="{Binding ResetHistoryCommand}" Text="Reset history"/>
         </StackLayout>
-        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200" x:Name="colorHistory">
+        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200" x:Name="colorHistory" Margin="0, 0, 0, 20">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView HeightRequest="40">
@@ -26,13 +27,22 @@
                                 <SwipeItem IconImageSource="trash.png" BackgroundColor="Red" Text="Delete" Command="{Binding BindingContext.DeleteColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
                             </SwipeItems>
                         </SwipeView.LeftItems>
-                        <StackLayout BackgroundColor="{Binding HexaCode}" Orientation="Horizontal">
-                            <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}"/>
-                            <Label VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}" HorizontalOptions="EndAndExpand"/>
-                            <StackLayout.GestureRecognizers>
+                        <Grid BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <Label VerticalOptions="Center" Text="{Binding HexaCode}"/>
+                            <StackLayout Grid.Column="1" BackgroundColor="{Binding HexaCode}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            
+                            <Grid.GestureRecognizers>
                                 <TapGestureRecognizer  Command="{Binding BindingContext.SelectColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                            </Grid.GestureRecognizers>
+                        </Grid>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
