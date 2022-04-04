@@ -21,6 +21,7 @@ public static class MauiProgram
 
 		#region Services
 		builder.Services.AddSingleton<IColorService, ColorService>();
+		builder.Services.AddSingleton<IHttpService, HttpService>();
 		#endregion
 
 
