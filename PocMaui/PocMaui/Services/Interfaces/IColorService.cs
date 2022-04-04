@@ -13,5 +13,6 @@ namespace PocMaui.Services.Interfaces
         Task<List<ColorEntity>> GetColorsDatabaseAsync();
         Task<ColorEntity> GetColorDatabaseAsync(int colorId);
         Task DeleteColorDatabaseAsync(ColorEntity color);
+        Task DeleteColorsDatabaseAsync();
     }
 }

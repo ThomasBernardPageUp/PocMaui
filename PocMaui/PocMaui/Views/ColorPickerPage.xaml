@@ -14,6 +14,9 @@
             WidthRequest="200"
             HeightRequest="200"/>
 
+        <StackLayout>
+            <Button Command="{Binding ResetHistoryCommand}" Text="Reset history"/>
+        </StackLayout>
         <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200" x:Name="colorHistory">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
