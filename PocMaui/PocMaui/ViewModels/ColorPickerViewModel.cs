@@ -93,6 +93,7 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region Methods
+
         #region DeleteColorCommand => OnDeleteColorCommand
         public Command<ColorEntity> DeleteColorCommand { get; set; }
         public async Task OnDeleteColorCommand(ColorEntity color)
@@ -127,6 +128,7 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
+        #region SelectColorCommand => OnSelectColorCommand
         public Command<ColorEntity> SelectColorCommand { get; set; }
         public async Task OnSelectColorCommand(ColorEntity colorEntity)
         {
@@ -135,11 +137,14 @@ namespace PocMaui.ViewModels
             GreenSliderValue = (int)(color.Green*255);
             BlueSliderValue = (int)(color.Blue*255);
         }
+        #endregion
 
+        #region LoadColors
         public async Task LoadColors()
         {
             Colors = new ObservableCollection<ColorEntity>(await _colorService.GetColorsDatabaseAsync());
         }
+        #endregion
         #endregion
     }
 }
