@@ -4,9 +4,30 @@
              x:Class="PocMaui.ColorPickerPage"
              Title="ColorPickerPage"
              BackgroundColor="White">
-    <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+    <StackLayout
+        Margin="30">
+        <Label FontSize="Title" HorizontalOptions="CenterAndExpand" Text="{Binding HexaColorString}"/>
+        <Frame
+            BackgroundColor="{Binding FrameColor, Mode=TwoWay}"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="400"
+            HeightRequest="400"/>
+
+        <StackLayout>
+            <Label Text="Red : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding RedSliderValue}"/>
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Green : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding GreenSliderValue}"/>
+
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Blue : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding BlueSliderValue}"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>
