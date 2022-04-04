@@ -10,11 +10,6 @@
                 <Setter Property="FontFamily" Value="OpenSansRegular" />
             </Style>
 
-            <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="Padding" Value="14,10" />
-            </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

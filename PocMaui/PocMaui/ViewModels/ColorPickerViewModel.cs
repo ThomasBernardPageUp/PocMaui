@@ -18,6 +18,7 @@ namespace PocMaui.ViewModels
         {
             _colorService = Services.ServiceProvider.GetService<IColorService>();
             SaveColorCommand = new Command(async () => await OnSaveColorCommand());
+            DeleteColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnDeleteColorCommand(color));
 
             LoadColors();
         }
@@ -86,6 +87,16 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region Methods
+        #region DeleteColorCommand => OnDeleteColorCommand
+        public Command<ColorEntity> DeleteColorCommand { get; set; }
+        public async Task OnDeleteColorCommand(ColorEntity color)
+        {
+            Colors.Remove(color);
+            await _colorService.DeleteColorDatabaseAsync(color);
+        }
+        #endregion
+
+        #region SaveColorCommand => OnSaveColorCommand
         public Command SaveColorCommand { get; set; }
         public async Task OnSaveColorCommand()
         {
@@ -99,6 +110,7 @@ namespace PocMaui.ViewModels
             await _colorService.SaveColorDatabaseAsync(colorEntity);
             Colors.Add(colorEntity);
         }
+        #endregion
 
         public async Task LoadColors()
         {

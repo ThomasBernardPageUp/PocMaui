@@ -14,13 +14,20 @@
             WidthRequest="200"
             HeightRequest="200"/>
 
-        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200">
+        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200" x:Name="colorHistory">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout BackgroundColor="{Binding HexaCode}" Orientation="Horizontal" Margin="10" Padding="20">
-                        <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}"/>
-                        <Label VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}" HorizontalOptions="EndAndExpand"/>
-                    </StackLayout>
+                    <SwipeView HeightRequest="40">
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem IconImageSource="trash.png" BackgroundColor="Red" Text="Delete" Command="{Binding BindingContext.DeleteColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <StackLayout BackgroundColor="{Binding HexaCode}" Orientation="Horizontal">
+                            <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}"/>
+                            <Label VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
