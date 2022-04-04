@@ -32,5 +32,10 @@ namespace PocMaui.Services
         {
             _colorRepository.Delete(color);
         }
+
+        public async Task DeleteColorsDatabaseAsync()
+        {
+            _colorRepository.Clear();
+        }
     }
 }
