@@ -1,6 +1,7 @@
 ﻿using PocMaui.Models.Entities;
 using PocMaui.Repositories;
 using PocMaui.Repositories.Interfaces;
+using PocMaui.Services.Interfaces;
 using PocMaui.ViewModels.Base;
 
 namespace PocMaui.ViewModels
@@ -8,15 +9,14 @@ namespace PocMaui.ViewModels
     public class ColorPickerViewModel : BaseViewModel
     {
         #region Privates
-        private readonly IRepository<ColorEntity> _colorRepository;
+        private readonly IColorService _colorService;
         #endregion
 
         #region CTOR
         public ColorPickerViewModel()
         {
-            _colorRepository = Services.ServiceProvider.GetService<IRepository<ColorEntity>>();
+            _colorService = Services.ServiceProvider.GetService<IColorService>();
             this.SaveColorCommand = new Command(async () => await OnSaveColorCommand());
-            _colorRepository = new Repository<ColorEntity>();
         }
         #endregion
 
@@ -74,7 +74,7 @@ namespace PocMaui.ViewModels
 
             colorEntity.Name = colorName;
 
-            _colorRepository.Insert(colorEntity);
+            await _colorService.SaveColorDatabaseAsync(colorEntity);
         }
         #endregion
     }

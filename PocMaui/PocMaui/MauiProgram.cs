@@ -1,6 +1,8 @@
 ﻿using PocMaui.Models.Entities;
 using PocMaui.Repositories;
 using PocMaui.Repositories.Interfaces;
+using PocMaui.Services;
+using PocMaui.Services.Interfaces;
 
 namespace PocMaui;
 
@@ -13,8 +15,12 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts => fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"));
 
-		#region Repo
+		#region Repositories
 		builder.Services.AddSingleton<IRepository<ColorEntity>, Repository<ColorEntity>>();
+		#endregion
+
+		#region Services
+		builder.Services.AddSingleton<IColorService, ColorService>();
 		#endregion
 
 
