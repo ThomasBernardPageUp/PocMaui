@@ -20,6 +20,7 @@ namespace PocMaui.ViewModels
             SaveColorCommand = new Command(async () => await OnSaveColorCommand());
             DeleteColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnDeleteColorCommand(color));
             ResetHistoryCommand = new Command(async () => await OnResetHistoryCommand());
+            SelectColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnSelectColorCommand(color));
 
             LoadColors();
         }
@@ -39,6 +40,7 @@ namespace PocMaui.ViewModels
                 _redSliderValue = value;
                 NotifyPropertyChanged(nameof(FrameColor));
                 NotifyPropertyChanged(nameof(HexaColorString));
+                NotifyPropertyChanged(nameof(RedSliderValue));
             }
         }
         #endregion
@@ -53,6 +55,7 @@ namespace PocMaui.ViewModels
                 _greenSliderValue = value;
                 NotifyPropertyChanged(nameof(FrameColor));
                 NotifyPropertyChanged(nameof(HexaColorString));
+                NotifyPropertyChanged(nameof(GreenSliderValue));
             }
         }
         #endregion
@@ -67,9 +70,12 @@ namespace PocMaui.ViewModels
                 _blueSliderValue = value;
                 NotifyPropertyChanged(nameof(HexaColorString));
                 NotifyPropertyChanged(nameof(FrameColor));
+                NotifyPropertyChanged(nameof(BlueSliderValue));
             }
         }
         #endregion
+
+        public Color FrameColor => Color.FromRgb(RedSliderValue, GreenSliderValue, BlueSliderValue);
 
         #region Colors
         private ObservableCollection<ColorEntity> _colors;
@@ -84,7 +90,6 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
-        public Color FrameColor  => Color.FromRgb(RedSliderValue, GreenSliderValue, BlueSliderValue);
         #endregion
 
         #region Methods
@@ -113,11 +118,22 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
+        #region ResetHistoryCommand => OnResetHistoryCommand
         public Command ResetHistoryCommand { get; set; }
         public async Task OnResetHistoryCommand()
         {
             Colors = new ObservableCollection<ColorEntity>();
             await _colorService.DeleteColorsDatabaseAsync();
+        }
+        #endregion
+
+        public Command<ColorEntity> SelectColorCommand { get; set; }
+        public async Task OnSelectColorCommand(ColorEntity colorEntity)
+        {
+            var color = Color.FromHex(colorEntity.HexaCode);
+            RedSliderValue = (int)(color.Red*255);
+            GreenSliderValue = (int)(color.Green*255);
+            BlueSliderValue = (int)(color.Blue*255);
         }
 
         public async Task LoadColors()

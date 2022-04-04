@@ -29,6 +29,9 @@
                         <StackLayout BackgroundColor="{Binding HexaCode}" Orientation="Horizontal">
                             <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}"/>
                             <Label VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}" HorizontalOptions="EndAndExpand"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding BindingContext.SelectColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </SwipeView>
                 </DataTemplate>
