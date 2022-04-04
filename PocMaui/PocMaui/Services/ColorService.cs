@@ -1,4 +1,6 @@
-﻿using PocMaui.Models.Entities;
+﻿using PocMaui.Commons;
+using PocMaui.Models.DTOs.Down;
+using PocMaui.Models.Entities;
 using PocMaui.Repositories.Interfaces;
 using PocMaui.Services.Interfaces;
 
@@ -7,10 +9,12 @@ namespace PocMaui.Services
     public class ColorService : IColorService
     {
         private readonly IRepository<ColorEntity> _colorRepository;
+        private readonly IHttpService _httpService;
 
         public ColorService()
         {
-            _colorRepository = Services.ServiceProvider.GetService<IRepository<ColorEntity>>();
+            _colorRepository = ServiceProvider.GetService<IRepository<ColorEntity>>();
+            _httpService = ServiceProvider.GetService<IHttpService>();
         }
 
         public async Task<ColorEntity> GetColorDatabaseAsync(int colorId)
@@ -36,6 +40,10 @@ namespace PocMaui.Services
         public async Task DeleteColorsDatabaseAsync()
         {
             _colorRepository.Clear();
+        }
+        public async Task GenerateColorsAsync()
+        {
+            var res = await _httpService.SendHttpRequest<ColorDTODown>(Constants.GetColorsApiEndPoint, HttpMethod.Get);
         }
     }
 }
