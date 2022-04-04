@@ -16,7 +16,9 @@ namespace PocMaui.ViewModels
         public ColorPickerViewModel()
         {
             _colorService = Services.ServiceProvider.GetService<IColorService>();
-            this.SaveColorCommand = new Command(async () => await OnSaveColorCommand());
+            SaveColorCommand = new Command(async () => await OnSaveColorCommand());
+
+            LoadColors();
         }
         #endregion
 
@@ -24,8 +26,8 @@ namespace PocMaui.ViewModels
 
         public string HexaColorString => $"{FrameColor.ToHex()}";
 
+        #region RedSliderValue
         private int _redSliderValue;
-
         public int RedSliderValue
         {
             get => _redSliderValue;
@@ -36,7 +38,9 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(HexaColorString));
             }
         }
+        #endregion
 
+        #region GreenSliderValue
         private int _greenSliderValue;
         public int GreenSliderValue
         {
@@ -48,7 +52,9 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(HexaColorString));
             }
         }
+        #endregion
 
+        #region BlueSliderValue
         private int _blueSliderValue;
         public int BlueSliderValue
         {
@@ -60,6 +66,20 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(FrameColor));
             }
         }
+        #endregion
+
+        #region Colors
+        private List<ColorEntity> _colors;
+        public List<ColorEntity> Colors
+        {
+            get => _colors;
+            set
+            {
+                _colors = value;
+                NotifyPropertyChanged(nameof(Colors));
+            }
+        }
+        #endregion
 
         public Color FrameColor  => Color.FromRgb(RedSliderValue, GreenSliderValue, BlueSliderValue);
         #endregion
@@ -75,6 +95,12 @@ namespace PocMaui.ViewModels
             colorEntity.Name = colorName;
 
             await _colorService.SaveColorDatabaseAsync(colorEntity);
+            Colors.Add(colorEntity);
+        }
+
+        public async Task LoadColors()
+        {
+            Colors = await _colorService.GetColorsDatabaseAsync();
         }
         #endregion
     }

@@ -9,10 +9,18 @@
         <Label FontSize="Title" HorizontalOptions="CenterAndExpand" Text="{Binding HexaColorString}"/>
         <Frame
             BackgroundColor="{Binding FrameColor, Mode=TwoWay}"
-            HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand"
-            WidthRequest="400"
-            HeightRequest="400"/>
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
+
+        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding HexaCode}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <StackLayout>
             <Label Text="Red : "/>
