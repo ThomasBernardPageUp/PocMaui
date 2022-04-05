@@ -23,6 +23,11 @@ namespace PocMaui.ViewModels
             Words = new ObservableCollection<IEnumerable<SutomWordEntityWrapper>>();
         }
 
+        public async void OnNavigatedTo(NavigatedToEventArgs args)
+        {
+            CorrectWord = await _wordService.GetRandomWord();
+        }
+
         public Command UserValidWordCommand { get; set; }
         private async Task OnUserValidWordCommand()
         {
@@ -61,7 +66,7 @@ namespace PocMaui.ViewModels
         }
 
         #region Props
-        public string CorrectWord => "Banale";
+        public string CorrectWord { get; set; }
 
         #region UserWord
         private string _userWord;
