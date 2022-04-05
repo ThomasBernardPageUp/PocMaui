@@ -61,12 +61,16 @@ namespace PocMaui.Services
             var url = $"{Constants.GetPictureColorsApiBaseUrl}?models=properties&url={pictureUrl}&api_user={Constants.PictureColorsApiUser}&api_secret={Constants.PictureColorsApiSecret}";
             var pictureColorsDTODown = await _httpService.SendHttpRequest<PictureColorsDTODown>(url, HttpMethod.Get);
 
-            var colors = pictureColorsDTODown.Colors.Accent.Select(c => new ColorEntity(c)).ToList();
+            if (pictureColorsDTODown != null)
+            {
+                var colors = pictureColorsDTODown.Colors.Accent.Select(c => new ColorEntity(c)).ToList();
 
-            colors.Insert(0, new ColorEntity(pictureColorsDTODown.Colors.Dominant));
-            colors.AddRange(pictureColorsDTODown.Colors.Other.Select(c => new ColorEntity(c)));
+                colors.Insert(0, new ColorEntity(pictureColorsDTODown.Colors.Dominant));
+                colors.AddRange(pictureColorsDTODown.Colors.Other.Select(c => new ColorEntity(c)));
 
-            return colors;
+                return colors;
+            }
+            return Enumerable.Empty<ColorEntity>();
         }
     }
 }
