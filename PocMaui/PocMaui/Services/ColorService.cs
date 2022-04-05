@@ -52,7 +52,6 @@ namespace PocMaui.Services
             string randomHexa = random.Next(0, 16777215).ToString("X");
 
             var url = Constants.GetColorsApiEndPoint + randomHexa;
-            Console.WriteLine(url);
             var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get);
             return colorsRoot.Colors;
         }
