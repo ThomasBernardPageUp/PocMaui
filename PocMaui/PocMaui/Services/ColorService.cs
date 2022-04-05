@@ -41,9 +41,10 @@ namespace PocMaui.Services
         {
             _colorRepository.Clear();
         }
-        public async Task GenerateColorsAsync()
+        public async Task<List<PocMaui.Models.DTOs.Down.Color>> GenerateColorsAsync()
         {
-            var res = await _httpService.SendHttpRequest<ColorDTODown>(Constants.GetColorsApiEndPoint, HttpMethod.Get);
+            var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(Constants.GetColorsApiEndPoint, HttpMethod.Get);
+            return colorsRoot.Colors;
         }
     }
 }

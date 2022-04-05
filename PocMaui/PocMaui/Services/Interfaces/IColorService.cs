@@ -1,4 +1,5 @@
-﻿using PocMaui.Models.Entities;
+﻿using PocMaui.Models.DTOs.Down;
+using PocMaui.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace PocMaui.Services.Interfaces
         Task<ColorEntity> GetColorDatabaseAsync(int colorId);
         Task DeleteColorDatabaseAsync(ColorEntity color);
         Task DeleteColorsDatabaseAsync();
-        Task GenerateColorsAsync();
+        Task<List<PocMaui.Models.DTOs.Down.Color>> GenerateColorsAsync();
     }
 }
