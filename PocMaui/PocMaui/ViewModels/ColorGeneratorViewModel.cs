@@ -29,7 +29,17 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
-        public string PictureLink { get; set; }
+
+        private string _pictureLink;
+        public string PictureLink
+        {
+            get => _pictureLink;
+            set
+            {
+                _pictureLink = value;
+                NotifyPropertyChanged(nameof(PictureLink));
+            }
+        }
 
         #region GeneratedColors
         private ObservableCollection<ColorEntity> _generatedColors;

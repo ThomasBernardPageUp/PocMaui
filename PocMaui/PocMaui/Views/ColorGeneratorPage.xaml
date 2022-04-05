@@ -26,5 +26,6 @@
             <Entry Text="{Binding PictureLink}" HorizontalOptions="FillAndExpand"/>
             <Button Command="{Binding CheckPictureColorsCommand}" Text="Check colors"/>
         </StackLayout>
+        <Image Source="{Binding PictureLink}"/>
     </StackLayout>
 </ContentPage>

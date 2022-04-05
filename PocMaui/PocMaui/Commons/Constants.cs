@@ -10,7 +10,7 @@ namespace PocMaui.Commons
     {
         public const string GetColorsApiEndPoint = "https://www.thecolorapi.com/scheme?hex=";
         public const string GetPictureColorsApiBaseUrl = "https://api.sightengine.com/1.0/check.json";
-        public const string PictureColorsApiUser = "must modify";
-        public const string PictureColorsApiSecret = "must modify";
+        public const string PictureColorsApiUser = "936537523";
+        public const string PictureColorsApiSecret = "akNjWgVh7jNAjpSczGep";
     }
 }
