@@ -66,7 +66,17 @@ namespace PocMaui.ViewModels
         }
 
         #region Props
-        public string CorrectWord { get; set; }
+
+        private string _correctWord;
+        public string CorrectWord
+        {
+            get => _correctWord;
+            set
+            {
+                _correctWord = value.ToUpper();
+                NotifyPropertyChanged(nameof(CorrectWord));
+            }
+        }
 
         #region UserWord
         private string _userWord;
