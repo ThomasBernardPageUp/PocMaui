@@ -17,5 +17,6 @@ namespace PocMaui.Services.Interfaces
         Task DeleteColorsDatabaseAsync();
         Task<List<PocMaui.Models.DTOs.Down.Color>> GenerateColorsAsync();
         Task<IEnumerable<ColorEntity>> SaveColorDatabaseAsync(IEnumerable<ColorEntity> colors);
+        Task<IEnumerable<ColorEntity>> GetPictureColorsAsync(string pictureUrl);
     }
 }

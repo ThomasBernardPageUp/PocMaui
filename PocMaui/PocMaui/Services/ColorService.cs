@@ -55,5 +55,13 @@ namespace PocMaui.Services
             var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get);
             return colorsRoot.Colors;
         }
+
+        public async Task<IEnumerable<ColorEntity>> GetPictureColorsAsync(string pictureUrl)
+        {
+            var url = $"{Constants.GetPictureColorsApiBaseUrl}?models=properties&url={pictureUrl}";
+            var res = await _httpService.SendHttpRequest<PictureColorsDTODown>(url, HttpMethod.Get);
+
+            return res.Colors.Accent.Select(c => new ColorEntity(c.Hex.ToUpper(), c.Hex.ToUpper()));
+        }
     }
 }
