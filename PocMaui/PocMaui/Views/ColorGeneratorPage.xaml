@@ -8,16 +8,24 @@
         Margin="30">
         <Button Margin="0,20" Command="{Binding GenerateColorsCommand}" Text="Generate random theme"/>
 
-        <CollectionView ItemsSource="{Binding GeneratedColors}">
+        <CollectionView ItemsSource="{Binding GeneratedColors}" HeightRequest="200">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout HeightRequest="40" BackgroundColor="{Binding Hex.Value}">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Hex.Value}"></Label>
+                    <StackLayout HeightRequest="40" BackgroundColor="{Binding HexaCode}">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}"></Label>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <Button Margin="0, 20" Command="{Binding SaveColorsCommand}" Text="Save colors"/>
+
+        <Label Text="You can now generate your application themes thanks a picture ! Just enter your picture link and click on the button."/>
+
+        <StackLayout Orientation="Horizontal">
+            <Entry Text="{Binding PictureLink}" HorizontalOptions="FillAndExpand"/>
+            <Button Command="{Binding CheckPictureColorsCommand}" Text="Check colors"/>
+        </StackLayout>
+        <Image Source="{Binding PictureLink}"/>
     </StackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using PocMaui.Models.DTOs.Down;
+using SQLite;
 
 namespace PocMaui.Models.Entities
 {
@@ -20,6 +21,12 @@ namespace PocMaui.Models.Entities
         {
             Name = name;
             HexaCode = hexaCode;
+        }
+
+        public ColorEntity(ColorProperty colorProperty):this()
+        {
+            Name = colorProperty.Hex.ToUpper();
+            HexaCode = colorProperty.Hex.ToUpper();
         }
     }
 }

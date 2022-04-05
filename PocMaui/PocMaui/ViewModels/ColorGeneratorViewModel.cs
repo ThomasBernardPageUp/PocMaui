@@ -21,13 +21,29 @@ namespace PocMaui.ViewModels
         {
             GenerateColorsCommand = new Command(async () => await OnGenerateColorsCommand());
             SaveColorsCommand = new Command(async () => await OnSaveColorsCommand());
+            CheckPictureColorsCommand = new Command(async () => await OnCheckPictureColorsCommand());
+
+            PictureLink = "https://sightengine.com/assets/img/examples/example7.jpg";
 
             _colorService = Services.ServiceProvider.GetService<IColorService>();
         }
         #endregion
 
-        private ObservableCollection<PocMaui.Models.DTOs.Down.Color> _generatedColors;
-        public ObservableCollection<PocMaui.Models.DTOs.Down.Color> GeneratedColors
+
+        private string _pictureLink;
+        public string PictureLink
+        {
+            get => _pictureLink;
+            set
+            {
+                _pictureLink = value;
+                NotifyPropertyChanged(nameof(PictureLink));
+            }
+        }
+
+        #region GeneratedColors
+        private ObservableCollection<ColorEntity> _generatedColors;
+        public ObservableCollection<ColorEntity> GeneratedColors
         {
             get => _generatedColors;
             set
@@ -36,25 +52,40 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(GeneratedColors));
             }
         }
+        #endregion
 
 
         #region Methods
+
+
+        public Command CheckPictureColorsCommand { get; set; }
+        public async Task OnCheckPictureColorsCommand()
+        {
+            var colors = await _colorService.GetPictureColorsAsync(PictureLink);
+            GeneratedColors = new ObservableCollection<ColorEntity>(colors);
+        }
 
         #region GenerateColorsCommand => OnGenerateColorsCommand
         public Command GenerateColorsCommand { get; set; }
         public async Task OnGenerateColorsCommand()
         {
             var colors = await _colorService.GenerateColorsAsync();
-            GeneratedColors = new ObservableCollection<PocMaui.Models.DTOs.Down.Color>(colors);
+            GeneratedColors = new ObservableCollection<ColorEntity>(colors);
         }
         #endregion
 
+        #region SaveColorsCommand => OnSaveColorsCommand
         public Command SaveColorsCommand { get; set; }
         private async Task OnSaveColorsCommand()
         {
-            var colorsEntity = GeneratedColors.Select(c => new ColorEntity(c.Hex.Clean, c.Hex.Value));
-            await _colorService.SaveColorDatabaseAsync(colorsEntity);
+            if (GeneratedColors == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Please generate a theme before !", "Ok");
+                return;
+            }
+            await _colorService.SaveColorDatabaseAsync(GeneratedColors);
         }
+        #endregion
 
         #endregion
     }
