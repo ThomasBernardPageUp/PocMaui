@@ -4,7 +4,9 @@
              x:Class="PocMaui.ColorGeneratorPage"
              Title="ColorGeneratorPage"
              BackgroundColor="White">
-    <StackLayout>
+    <StackLayout
+        Margin="30">
+        <Button Command="{Binding GenerateColorsCommand}" Text="Generate random theme"/>
         <Label Text="Welcome to .NET MAUI!"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
