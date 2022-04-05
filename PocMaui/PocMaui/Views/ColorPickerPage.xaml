@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocMaui.ColorPickerPage"
+             Title="ColorPickerPage"
+             BackgroundColor="White">
+    <StackLayout
+        Margin="30">
+        <Label FontSize="Title" HorizontalOptions="CenterAndExpand" Text="{Binding HexaColorString}"/>
+        <Frame
+            BackgroundColor="{Binding FrameColor, Mode=TwoWay}"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="200"
+            HeightRequest="200"
+            CornerRadius="200"/>
+
+        <StackLayout>
+            <Button Command="{Binding ResetHistoryCommand}" Text="Reset history"/>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding Colors}" HeightRequest="200" x:Name="colorHistory" Margin="0, 0, 0, 20">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView HeightRequest="40">
+                        <Grid BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <Label VerticalOptions="Center" Text="{Binding HexaCode}"/>
+                            <StackLayout Grid.Column="1" BackgroundColor="{Binding HexaCode}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding BindingContext.SelectColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem IconImageSource="trash.png" BackgroundColor="Red" Text="Delete" Command="{Binding BindingContext.DeleteColorCommand, Source={x:Reference colorHistory}}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <StackLayout>
+            <Label Text="Red : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding RedSliderValue}"/>
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Green : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding GreenSliderValue}"/>
+
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Blue : "/>
+            <Slider Minimum="0" Maximum="255" Value="{Binding BlueSliderValue}"/>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="End" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+            <Label Margin="0, 0, 30, 0" VerticalOptions="Center" Text="Generate colors">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GenerateColorsCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Button Text="Save this color" Command="{Binding SaveColorCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

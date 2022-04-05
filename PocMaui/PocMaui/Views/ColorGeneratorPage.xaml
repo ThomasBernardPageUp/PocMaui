@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocMaui.ColorGeneratorPage"
+             Title="ColorGeneratorPage"
+             BackgroundColor="White">
+    <StackLayout
+        Margin="30">
+        <Button Margin="0,20" Command="{Binding GenerateColorsCommand}" Text="Generate random theme"/>
+
+        <CollectionView ItemsSource="{Binding GeneratedColors}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="40" BackgroundColor="{Binding Hex.Value}">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Hex.Value}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Margin="0, 20" Command="{Binding SaveColorsCommand}" Text="Save colors"/>
+    </StackLayout>
+</ContentPage>
