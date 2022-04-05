@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocMaui.SutomPage"
+             xmlns:converters="clr-namespace:PocMaui.Converters"
+             Title="SutomPage"
+             BackgroundColor="Black">
+
+    <ContentPage.Resources>
+        <converters:SutomWordStatusToColorConverter x:Key="SutomWordStatusToColorConverter"/>
+    </ContentPage.Resources>
+    
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding Words}" HeightRequest="300">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <CollectionView ItemsSource="{Binding .}" BackgroundColor="Green">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label BackgroundColor="Gray" HorizontalOptions="EndAndExpand" FontSize="Title" TextColor="{Binding Status, Converter={StaticResource SutomWordStatusToColorConverter}}" Text="{Binding Value}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Orientation="Horizontal">
+            <Entry MaxLength="{Binding CorrectWord.Length}" Text="{Binding UserWord}" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
+            <Button Command="{Binding UserValidWordCommand}" Text="Valid"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

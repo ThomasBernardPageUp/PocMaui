@@ -22,7 +22,7 @@ namespace PocMaui.ViewModels
             ResetHistoryCommand = new Command(async () => await OnResetHistoryCommand());
             SelectColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnSelectColorCommand(color));
             GenerateColorsCommand = new Command(async () => await OnGenerateColorsCommand());
-
+            FrameTappedCommand = new Command(async () => await OnFrameTappedCommand());
         }
         #endregion
 
@@ -98,6 +98,14 @@ namespace PocMaui.ViewModels
         #endregion
 
         #region Methods
+
+        #region FrameTappedCommand => OnFrameTappedCommand
+        public Command FrameTappedCommand { get; set; }
+        private async Task OnFrameTappedCommand()
+        {
+            await Navigation.PushAsync(new SutomPage());
+        }
+        #endregion
 
         #region GenerateColorsCommand => OnGenerateColorsCommand
         public Command GenerateColorsCommand { get; set; }
