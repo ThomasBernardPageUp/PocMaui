@@ -43,7 +43,12 @@ namespace PocMaui.Services
         }
         public async Task<List<PocMaui.Models.DTOs.Down.Color>> GenerateColorsAsync()
         {
-            var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(Constants.GetColorsApiEndPoint, HttpMethod.Get);
+            var random = new Random();
+            string randomHexa = random.Next(0, 16777215).ToString("X");
+
+            var url = Constants.GetColorsApiEndPoint + randomHexa;
+            Console.WriteLine(url);
+            var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get);
             return colorsRoot.Colors;
         }
     }

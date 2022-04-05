@@ -6,9 +6,18 @@
              BackgroundColor="White">
     <StackLayout
         Margin="30">
-        <Button Command="{Binding GenerateColorsCommand}" Text="Generate random theme"/>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <Button Margin="0,20" Command="{Binding GenerateColorsCommand}" Text="Generate random theme"/>
+
+        <CollectionView ItemsSource="{Binding GeneratedColors}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="40" BackgroundColor="{Binding Hex.Value}">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Hex.Value}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Save colors"/>
     </StackLayout>
 </ContentPage>

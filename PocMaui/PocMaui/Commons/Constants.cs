@@ -8,6 +8,6 @@ namespace PocMaui.Commons
 {
     public class Constants
     {
-        public const string GetColorsApiEndPoint = "https://www.thecolorapi.com/scheme?hex=FF";
+        public const string GetColorsApiEndPoint = "https://www.thecolorapi.com/scheme?hex=";
     }
 }
