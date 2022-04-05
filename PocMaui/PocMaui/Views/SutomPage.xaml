@@ -12,15 +12,18 @@
     
     <StackLayout>
         <CollectionView ItemsSource="{Binding Words}" HeightRequest="300">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <CollectionView ItemsSource="{Binding .}" BackgroundColor="Green">
+                    <CollectionView HorizontalOptions="Center" ItemsSource="{Binding .}" HeightRequest="30">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal"/>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label BackgroundColor="Gray" HorizontalOptions="EndAndExpand" FontSize="Title" TextColor="{Binding Status, Converter={StaticResource SutomWordStatusToColorConverter}}" Text="{Binding Value}"/>
+                                <Label HorizontalOptions="EndAndExpand" FontSize="Title" TextColor="{Binding Status, Converter={StaticResource SutomWordStatusToColorConverter}}" Text="{Binding Value}"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

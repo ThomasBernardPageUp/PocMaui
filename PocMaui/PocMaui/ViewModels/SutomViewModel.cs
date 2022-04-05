@@ -22,6 +22,16 @@ namespace PocMaui.ViewModels
         public Command UserValidWordCommand { get; set; }
         private async Task OnUserValidWordCommand()
         {
+            if (CorrectWord.ToUpper() == UserWord)
+            {
+                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/6", "Ok");
+            }
+            else if(Words.Count() >= 6)
+            {
+                await App.Current.MainPage.DisplayAlert("...", $"You loose this game", "Ok");
+            }
+
+
             if (CorrectWord.Length != _userWord.Length)
                 return;
 
@@ -31,9 +41,9 @@ namespace PocMaui.ViewModels
             for (int i = 0; i < CorrectWord.Length; i++)
             {
 
-                if (_userWord[i] == CorrectWord.ToLower()[i])
+                if (_userWord[i] == CorrectWord.ToUpper()[i])
                     word.Add(new SutomWordEntityWrapper() { Status = 2, Value = _userWord[i] });
-                else if (CorrectWord.ToLower().Contains(_userWord[i]))
+                else if (CorrectWord.ToUpper().Contains(_userWord[i]))
                     word.Add(new SutomWordEntityWrapper() { Status = 1, Value = _userWord[i] });
                 else
                     word.Add(new SutomWordEntityWrapper() { Status = 0, Value = _userWord[i] });
@@ -54,7 +64,7 @@ namespace PocMaui.ViewModels
             get => _userWord;
             set
             {
-                _userWord = value.ToLower();
+                _userWord = value.ToUpper();
                 NotifyPropertyChanged(nameof(UserWord));
             }
         }
