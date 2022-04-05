@@ -23,9 +23,13 @@ namespace PocMaui.ViewModels
             SelectColorCommand = new Command<ColorEntity>(async (ColorEntity color) => await OnSelectColorCommand(color));
             GenerateColorsCommand = new Command(async () => await OnGenerateColorsCommand());
 
-            LoadColors();
         }
         #endregion
+
+        public void OnNavigatedTo(NavigatedToEventArgs args)
+        {
+            LoadColors();
+        }
 
         #region Props
 

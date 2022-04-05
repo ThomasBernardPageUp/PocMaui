@@ -32,6 +32,11 @@ namespace PocMaui.Services
             return _colorRepository.Insert(color);
         }
 
+        public async Task<IEnumerable<ColorEntity>> SaveColorDatabaseAsync(IEnumerable<ColorEntity> colors)
+        {
+            return colors.Select(c => _colorRepository.Insert(c)).ToList();
+        }
+
         public async Task DeleteColorDatabaseAsync(ColorEntity color)
         {
             _colorRepository.Delete(color);

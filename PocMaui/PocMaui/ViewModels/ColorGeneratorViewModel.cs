@@ -1,4 +1,5 @@
-﻿using PocMaui.Services.Interfaces;
+﻿using PocMaui.Models.Entities;
+using PocMaui.Services.Interfaces;
 using PocMaui.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace PocMaui.ViewModels
         public ColorGeneratorViewModel(INavigation navigation) : base(navigation)
         {
             GenerateColorsCommand = new Command(async () => await OnGenerateColorsCommand());
+            SaveColorsCommand = new Command(async () => await OnSaveColorsCommand());
 
             _colorService = Services.ServiceProvider.GetService<IColorService>();
         }
@@ -46,6 +48,13 @@ namespace PocMaui.ViewModels
             GeneratedColors = new ObservableCollection<PocMaui.Models.DTOs.Down.Color>(colors);
         }
         #endregion
+
+        public Command SaveColorsCommand { get; set; }
+        private async Task OnSaveColorsCommand()
+        {
+            var colorsEntity = GeneratedColors.Select(c => new ColorEntity(c.Hex.Clean, c.Hex.Value));
+            await _colorService.SaveColorDatabaseAsync(colorsEntity);
+        }
 
         #endregion
     }
