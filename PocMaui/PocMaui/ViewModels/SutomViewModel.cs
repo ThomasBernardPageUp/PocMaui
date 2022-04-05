@@ -1,4 +1,5 @@
 ﻿using PocMaui.Models.Entities;
+using PocMaui.Services.Interfaces;
 using PocMaui.ViewModels.Base;
 using PocMaui.Wrappers;
 using System;
@@ -12,9 +13,12 @@ namespace PocMaui.ViewModels
 {
     public class SutomViewModel : BaseViewModel
     {
+        private readonly IWordService _wordService;
         public SutomViewModel(INavigation navigation):base(navigation)
         {
             UserValidWordCommand = new Command(async () => await OnUserValidWordCommand());
+
+            _wordService = Services.ServiceProvider.GetService<IWordService>();
 
             Words = new ObservableCollection<IEnumerable<SutomWordEntityWrapper>>();
         }
@@ -25,10 +29,12 @@ namespace PocMaui.ViewModels
             if (CorrectWord.ToUpper() == UserWord)
             {
                 await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/6", "Ok");
+                return;
             }
             else if(Words.Count() >= 6)
             {
                 await App.Current.MainPage.DisplayAlert("...", $"You loose this game", "Ok");
+                return;
             }
 
 
