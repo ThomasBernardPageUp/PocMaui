@@ -10,4 +10,5 @@ This application allow you to create and save colors
 
 You can delete one color
 
-![Screenshot_1649143101](https://user-images.githubusercontent.com/90254070/161699796-1f72e332-c74b-4975-b241-4d82c04997f7.png)
+![Screenshot_1649148960](https://user-images.githubusercontent.com/90254070/161718098-18eac5c6-115d-49d5-b69d-91ff33647158.png)
+
