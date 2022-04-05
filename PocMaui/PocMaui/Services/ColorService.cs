@@ -46,22 +46,27 @@ namespace PocMaui.Services
         {
             _colorRepository.Clear();
         }
-        public async Task<List<PocMaui.Models.DTOs.Down.Color>> GenerateColorsAsync()
+        public async Task<IEnumerable<ColorEntity>> GenerateColorsAsync()
         {
             var random = new Random();
             string randomHexa = random.Next(0, 16777215).ToString("X");
 
             var url = Constants.GetColorsApiEndPoint + randomHexa;
             var colorsRoot = await _httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get);
-            return colorsRoot.Colors;
+            return colorsRoot.Colors.Select(c => new ColorEntity(c.Hex.Value, c.Hex.Value));
         }
 
         public async Task<IEnumerable<ColorEntity>> GetPictureColorsAsync(string pictureUrl)
         {
-            var url = $"{Constants.GetPictureColorsApiBaseUrl}?models=properties&url={pictureUrl}";
-            var res = await _httpService.SendHttpRequest<PictureColorsDTODown>(url, HttpMethod.Get);
+            var url = $"{Constants.GetPictureColorsApiBaseUrl}?models=properties&url={pictureUrl}&api_user={Constants.PictureColorsApiUser}&api_secret={Constants.PictureColorsApiSecret}";
+            var pictureColorsDTODown = await _httpService.SendHttpRequest<PictureColorsDTODown>(url, HttpMethod.Get);
 
-            return res.Colors.Accent.Select(c => new ColorEntity(c.Hex.ToUpper(), c.Hex.ToUpper()));
+            var colors = pictureColorsDTODown.Colors.Accent.Select(c => new ColorEntity(c)).ToList();
+
+            colors.Insert(0, new ColorEntity(pictureColorsDTODown.Colors.Dominant));
+            colors.AddRange(pictureColorsDTODown.Colors.Other.Select(c => new ColorEntity(c)));
+
+            return colors;
         }
     }
 }

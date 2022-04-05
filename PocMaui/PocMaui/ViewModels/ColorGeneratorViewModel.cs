@@ -32,8 +32,8 @@ namespace PocMaui.ViewModels
         public string PictureLink { get; set; }
 
         #region GeneratedColors
-        private ObservableCollection<PocMaui.Models.DTOs.Down.Color> _generatedColors;
-        public ObservableCollection<PocMaui.Models.DTOs.Down.Color> GeneratedColors
+        private ObservableCollection<ColorEntity> _generatedColors;
+        public ObservableCollection<ColorEntity> GeneratedColors
         {
             get => _generatedColors;
             set
@@ -52,6 +52,7 @@ namespace PocMaui.ViewModels
         public async Task OnCheckPictureColorsCommand()
         {
             var colors = await _colorService.GetPictureColorsAsync(PictureLink);
+            GeneratedColors = new ObservableCollection<ColorEntity>(colors);
         }
 
         #region GenerateColorsCommand => OnGenerateColorsCommand
@@ -59,7 +60,7 @@ namespace PocMaui.ViewModels
         public async Task OnGenerateColorsCommand()
         {
             var colors = await _colorService.GenerateColorsAsync();
-            GeneratedColors = new ObservableCollection<PocMaui.Models.DTOs.Down.Color>(colors);
+            GeneratedColors = new ObservableCollection<ColorEntity>(colors);
         }
         #endregion
 
@@ -72,8 +73,7 @@ namespace PocMaui.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", "Please generate a theme before !", "Ok");
                 return;
             }
-            var colorsEntity = GeneratedColors.Select(c => new ColorEntity(c.Hex.Clean, c.Hex.Value));
-            await _colorService.SaveColorDatabaseAsync(colorsEntity);
+            await _colorService.SaveColorDatabaseAsync(GeneratedColors);
         }
         #endregion
 

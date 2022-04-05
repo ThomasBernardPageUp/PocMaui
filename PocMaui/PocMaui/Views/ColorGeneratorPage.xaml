@@ -11,8 +11,8 @@
         <CollectionView ItemsSource="{Binding GeneratedColors}" HeightRequest="200">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout HeightRequest="40" BackgroundColor="{Binding Hex.Value}">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Hex.Value}"></Label>
+                    <StackLayout HeightRequest="40" BackgroundColor="{Binding HexaCode}">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HexaCode}"></Label>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
