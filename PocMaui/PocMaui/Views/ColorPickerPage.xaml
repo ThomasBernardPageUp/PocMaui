@@ -13,7 +13,12 @@
             VerticalOptions="CenterAndExpand"
             WidthRequest="200"
             HeightRequest="200"
-            CornerRadius="200"/>
+            CornerRadius="200">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding FrameTappedCommand}"/>
+
+            </Frame.GestureRecognizers>
+        </Frame>
 
         <StackLayout>
             <Button Command="{Binding ResetHistoryCommand}" Text="Reset history"/>

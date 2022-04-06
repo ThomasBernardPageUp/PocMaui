@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocMaui.SutomPage"
+             xmlns:converters="clr-namespace:PocMaui.Converters"
+             Title="Sutom">
+
+    <ContentPage.Resources>
+        <converters:SutomWordStatusToCaseColorConverter x:Key="SutomWordStatusToCaseColorConverter"/>
+        <converters:SutomWordStatusToCircleColorConverter x:Key="SutomWordStatusToCircleColorConverter"/>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="Black">
+        <StackLayout HeightRequest="300">
+            <CollectionView HorizontalOptions="CenterAndExpand" WidthRequest="400" ItemsSource="{Binding Words}" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"></LinearItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CollectionView HorizontalOptions="Center" ItemsSource="{Binding .}" HeightRequest="40">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="2"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout
+                                        BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCaseColorConverter}}">
+                                        <Frame
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            HasShadow="False"
+                                            VerticalOptions="CenterAndExpand"
+                                            Padding="0"
+                                            CornerRadius="40">
+                                            <Label
+                                                BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCircleColorConverter}}"
+                                                VerticalTextAlignment="Center"
+                                                TextColor="White"
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Title"
+                                                Text="{Binding Value}"/>
+                                        </Frame>
+                                    </StackLayout>
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal">
+            <Entry TextTransform="Uppercase" MaxLength="{Binding CorrectWord.Length}" BackgroundColor="White" Text="{Binding UserWord}" HorizontalOptions="FillAndExpand"/>
+            <Button Command="{Binding UserValidWordCommand}" Text="Valid"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

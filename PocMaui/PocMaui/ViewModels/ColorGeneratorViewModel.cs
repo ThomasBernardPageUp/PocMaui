@@ -29,7 +29,9 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
+        #region Props
 
+        #region PictureLink
         private string _pictureLink;
         public string PictureLink
         {
@@ -40,6 +42,7 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(PictureLink));
             }
         }
+        #endregion
 
         #region GeneratedColors
         private ObservableCollection<ColorEntity> _generatedColors;
@@ -54,6 +57,7 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
+        #endregion
 
         #region Methods
 

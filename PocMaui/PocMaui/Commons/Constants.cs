@@ -10,7 +10,9 @@ namespace PocMaui.Commons
     {
         public const string GetColorsApiEndPoint = "https://www.thecolorapi.com/scheme?hex=";
         public const string GetPictureColorsApiBaseUrl = "https://api.sightengine.com/1.0/check.json";
+        public const string GetWordApiBaseUrl = "https://frenchwordsapi.herokuapp.com/api/Word/GetRandomWord?nbrWordsNeeded=1";
         public const string PictureColorsApiUser = "936537523";
         public const string PictureColorsApiSecret = "akNjWgVh7jNAjpSczGep";
+
     }
 }
