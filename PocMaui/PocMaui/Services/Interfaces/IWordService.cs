@@ -9,5 +9,6 @@ namespace PocMaui.Services.Interfaces
     public interface IWordService
     {
         Task<string> GetRandomWord();
+        string NormalizeString(string stringToNormalize);
     }
 }

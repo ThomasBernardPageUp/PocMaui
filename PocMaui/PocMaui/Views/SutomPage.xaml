@@ -3,17 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocMaui.SutomPage"
              xmlns:converters="clr-namespace:PocMaui.Converters"
-             Title="SutomPage"
-             BackgroundColor="Black">
+             Title="Sutom">
 
     <ContentPage.Resources>
         <converters:SutomWordStatusToCaseColorConverter x:Key="SutomWordStatusToCaseColorConverter"/>
         <converters:SutomWordStatusToCircleColorConverter x:Key="SutomWordStatusToCircleColorConverter"/>
     </ContentPage.Resources>
-    
-    <StackLayout>
+
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="Black">
         <StackLayout HeightRequest="300">
-            <CollectionView ItemsSource="{Binding Words}" BackgroundColor="White">
+            <CollectionView HorizontalOptions="CenterAndExpand" WidthRequest="400" ItemsSource="{Binding Words}" BackgroundColor="White">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"></LinearItemsLayout>
                 </CollectionView.ItemsLayout>
@@ -26,8 +25,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout
-                                        BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCaseColorConverter}}"
-                                        >
+                                        BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCaseColorConverter}}">
                                         <Frame
                                             WidthRequest="40"
                                             HeightRequest="40"

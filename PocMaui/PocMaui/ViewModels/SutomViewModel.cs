@@ -25,23 +25,34 @@ namespace PocMaui.ViewModels
 
         public async void OnNavigatedTo(NavigatedToEventArgs args)
         {
-            CorrectWord = await _wordService.GetRandomWord();
+            // Generate the word
+            var correctWord = await _wordService.GetRandomWord(); 
+            CorrectWord = _wordService.NormalizeString(correctWord);
+
+            var firstWord = CorrectWord.Select((c, i) => 
+            {
+                var sutomWordEntityWrapper = new SutomWordEntityWrapper();
+                if (i == 0)
+                {
+                    sutomWordEntityWrapper.Value = c;
+                    sutomWordEntityWrapper.Status = 2;
+                }
+
+                return sutomWordEntityWrapper; 
+            });
+
+            Words.Add(firstWord);
         }
 
         public Command UserValidWordCommand { get; set; }
         private async Task OnUserValidWordCommand()
         {
-            if (CorrectWord.ToUpper() == UserWord)
-            {
-                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/6", "Ok");
-                return;
-            }
-            else if(Words.Count() >= 6)
+
+            if(Words.Count() >= 6)
             {
                 await App.Current.MainPage.DisplayAlert("...", $"You loose this game", "Ok");
                 return;
             }
-
 
             if (CorrectWord.Length != _userWord.Length)
                 return;
@@ -52,9 +63,9 @@ namespace PocMaui.ViewModels
             for (int i = 0; i < CorrectWord.Length; i++)
             {
 
-                if (_userWord[i] == CorrectWord.ToUpper()[i])
+                if (_userWord[i] == CorrectWord[i])
                     word.Add(new SutomWordEntityWrapper() { Status = 2, Value = _userWord[i] });
-                else if (CorrectWord.ToUpper().Contains(_userWord[i]))
+                else if (CorrectWord.Contains(_userWord[i]))
                     word.Add(new SutomWordEntityWrapper() { Status = 1, Value = _userWord[i] });
                 else
                     word.Add(new SutomWordEntityWrapper() { Status = 0, Value = _userWord[i] });
@@ -62,11 +73,18 @@ namespace PocMaui.ViewModels
 
             Words.Add(word);
 
+            if (CorrectWord == UserWord)
+            {
+                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/6", "Ok");
+                return;
+            }
+
             UserWord = "";
         }
 
         #region Props
 
+        #region CorrectWord
         private string _correctWord;
         public string CorrectWord
         {
@@ -77,6 +95,7 @@ namespace PocMaui.ViewModels
                 NotifyPropertyChanged(nameof(CorrectWord));
             }
         }
+        #endregion
 
         #region UserWord
         private string _userWord;
