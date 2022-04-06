@@ -7,31 +7,54 @@
              BackgroundColor="Black">
 
     <ContentPage.Resources>
-        <converters:SutomWordStatusToColorConverter x:Key="SutomWordStatusToColorConverter"/>
+        <converters:SutomWordStatusToCaseColorConverter x:Key="SutomWordStatusToCaseColorConverter"/>
+        <converters:SutomWordStatusToCircleColorConverter x:Key="SutomWordStatusToCircleColorConverter"/>
     </ContentPage.Resources>
     
     <StackLayout>
-        <CollectionView ItemsSource="{Binding Words}" HeightRequest="300">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"></LinearItemsLayout>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <CollectionView HorizontalOptions="Center" ItemsSource="{Binding .}" HeightRequest="30">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Label HorizontalOptions="EndAndExpand" FontSize="Title" TextColor="{Binding Status, Converter={StaticResource SutomWordStatusToColorConverter}}" Text="{Binding Value}"/>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <StackLayout HeightRequest="300">
+            <CollectionView ItemsSource="{Binding Words}" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"></LinearItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CollectionView HorizontalOptions="Center" ItemsSource="{Binding .}" HeightRequest="40">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="2"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout
+                                        BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCaseColorConverter}}"
+                                        >
+                                        <Frame
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            HasShadow="False"
+                                            VerticalOptions="CenterAndExpand"
+                                            Padding="0"
+                                            CornerRadius="40">
+                                            <Label
+                                                BackgroundColor="{Binding Status, Converter={StaticResource SutomWordStatusToCircleColorConverter}}"
+                                                VerticalTextAlignment="Center"
+                                                TextColor="White"
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Title"
+                                                Text="{Binding Value}"/>
+                                        </Frame>
+                                    </StackLayout>
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        
         <StackLayout Orientation="Horizontal">
-            <Entry MaxLength="{Binding CorrectWord.Length}" Text="{Binding UserWord}" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
+            <Entry TextTransform="Uppercase" MaxLength="{Binding CorrectWord.Length}" BackgroundColor="White" Text="{Binding UserWord}" HorizontalOptions="FillAndExpand"/>
             <Button Command="{Binding UserValidWordCommand}" Text="Valid"/>
         </StackLayout>
     </StackLayout>

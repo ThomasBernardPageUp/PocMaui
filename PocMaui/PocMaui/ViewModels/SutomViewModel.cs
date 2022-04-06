@@ -85,7 +85,7 @@ namespace PocMaui.ViewModels
             get => _userWord;
             set
             {
-                _userWord = value.ToUpper();
+                _userWord = value;
                 NotifyPropertyChanged(nameof(UserWord));
             }
         }

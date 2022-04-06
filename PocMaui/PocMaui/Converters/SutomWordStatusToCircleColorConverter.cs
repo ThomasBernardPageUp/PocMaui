@@ -1,30 +1,30 @@
 ﻿using System.Globalization;
-using Microsoft.Maui.Graphics;
 
 namespace PocMaui.Converters
 {
-    public class SutomWordStatusToColorConverter : IValueConverter
+    public class SutomWordStatusToCircleColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                switch ((int)value)
+                var status = (int)value;
+
+                switch (status)
                 {
                     case 0:
-                        return Color.FromArgb("FFFFFF");
+                        return "#0077C7";
                     case 1:
-                        return "#FFFF00";
+                        return "#FFBD00";
                     case 2:
-                        return "#FF0000";
+                        return "#E7002A";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-
-            return "FFFFFF";
+            return "#0077C7";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
