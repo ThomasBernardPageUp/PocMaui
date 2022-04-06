@@ -14,6 +14,8 @@ namespace PocMaui.ViewModels
     public class SutomViewModel : BaseViewModel
     {
         private readonly IWordService _wordService;
+        private int _numberOfTry = 7;
+
         public SutomViewModel(INavigation navigation):base(navigation)
         {
             UserValidWordCommand = new Command(async () => await OnUserValidWordCommand());
@@ -48,7 +50,7 @@ namespace PocMaui.ViewModels
         private async Task OnUserValidWordCommand()
         {
 
-            if(Words.Count() >= 6)
+            if(Words.Count() >= _numberOfTry)
             {
                 await App.Current.MainPage.DisplayAlert("...", $"You loose this game", "Ok");
                 return;
@@ -80,7 +82,7 @@ namespace PocMaui.ViewModels
 
             if (CorrectWord == UserWord)
             {
-                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/6", "Ok");
+                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/{_numberOfTry}", "Ok");
                 return;
             }
 
