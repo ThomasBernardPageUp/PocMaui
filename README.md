@@ -12,3 +12,8 @@ You can delete one color
 
 ![Screenshot_1649148960](https://user-images.githubusercontent.com/90254070/161718098-18eac5c6-115d-49d5-b69d-91ff33647158.png)
 
+
+
+You can now play a secret game 
+![Screenshot_1649231912](https://user-images.githubusercontent.com/90254070/161925376-14e57fcd-9c3a-482c-b858-3b61a4cd033a.png)
+
