@@ -10,5 +10,14 @@ namespace PocMaui.Wrappers
     {
         public char Value { get; set; }
         public int Status { get; set; } // 0 => Grey / 1 => Yellow / 2 => Red
+
+        public SutomWordEntityWrapper()
+        {
+        }
+
+        public SutomWordEntityWrapper(char value)
+        {
+            Value = value;
+        }
     }
 }

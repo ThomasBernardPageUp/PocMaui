@@ -62,13 +62,18 @@ namespace PocMaui.ViewModels
 
             for (int i = 0; i < CorrectWord.Length; i++)
             {
-
+                // If the char is in correct place
                 if (_userWord[i] == CorrectWord[i])
-                    word.Add(new SutomWordEntityWrapper() { Status = 2, Value = _userWord[i] });
-                else if (CorrectWord.Contains(_userWord[i]))
-                    word.Add(new SutomWordEntityWrapper() { Status = 1, Value = _userWord[i] });
+                    word.Add(new SutomWordEntityWrapper(_userWord[i]) { Status = 2 });
+
+                // If the char is not in correct place
+                else if (CorrectWord.Contains(_userWord[i]) && word.Where(w => w.Value == _userWord[i]).Count() < CorrectWord.Where(w => w == _userWord[i]).Count())
+                {
+                    word.Add(new SutomWordEntityWrapper(_userWord[i]) { Status = 1 });
+                }
+                // If char is not in correct word
                 else
-                    word.Add(new SutomWordEntityWrapper() { Status = 0, Value = _userWord[i] });
+                    word.Add(new SutomWordEntityWrapper(_userWord[i]));
             }
 
             Words.Add(word);
