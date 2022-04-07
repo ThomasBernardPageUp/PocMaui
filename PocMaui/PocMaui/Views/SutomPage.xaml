@@ -51,9 +51,48 @@
             </CollectionView>
         </StackLayout>
         
-        <StackLayout Orientation="Horizontal">
+        <!--<StackLayout Orientation="Horizontal">
             <Entry TextTransform="Uppercase" MaxLength="{Binding CorrectWord.Length}" BackgroundColor="White" Text="{Binding UserWord}" HorizontalOptions="FillAndExpand"/>
             <Button Command="{Binding UserValidWordCommand}" Text="Valid"/>
+        </StackLayout>-->
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="A" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="A"/>
+            <Button Text="B" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="B"/>
+            <Button Text="C" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="C"/>
+            <Button Text="D" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="D"/>
+            <Button Text="E" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="E"/>
+            <Button Text="F" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="F"/>
+            <Button Text="G" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="G"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="H" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="H"/>
+            <Button Text="I" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="I"/>
+            <Button Text="J" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="J"/>
+            <Button Text="K" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="K"/>
+            <Button Text="L" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="L"/>
+            <Button Text="M" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="M"/>
+            <Button Text="N" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="N"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="O" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="O"/>
+            <Button Text="P" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="P"/>
+            <Button Text="Q" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Q"/>
+            <Button Text="R" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="R"/>
+            <Button Text="S" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="S"/>
+            <Button Text="T" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="T"/>
+            <Button Text="U" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="U"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="V" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="V"/>
+            <Button Text="W" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="W"/>
+            <Button Text="X" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="X"/>
+            <Button Text="Y" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Y"/>
+            <Button Text="Z" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Z"/>
+            <Button Text="Delete" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Delete"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

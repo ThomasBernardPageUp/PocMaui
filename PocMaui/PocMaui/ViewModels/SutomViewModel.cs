@@ -18,11 +18,11 @@ namespace PocMaui.ViewModels
 
         public SutomViewModel(INavigation navigation):base(navigation)
         {
-            UserValidWordCommand = new Command(async () => await OnUserValidWordCommand());
+            KeyboardLetterPressedCommand = new Command<string>(async (string letter) => await OnKeyboardLetterPressedCommand(letter));
 
             _wordService = Services.ServiceProvider.GetService<IWordService>();
 
-            Words = new ObservableCollection<IEnumerable<SutomWordEntityWrapper>>();
+            Words = new ObservableCollection<ObservableCollection<SutomWordEntityWrapper>>();
         }
 
         public async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -30,6 +30,7 @@ namespace PocMaui.ViewModels
             // Generate the word
             var correctWord = await _wordService.GetRandomWord(); 
             CorrectWord = _wordService.NormalizeString(correctWord);
+            CorrectWord = "Pompier";
 
             var firstWord = CorrectWord.Select((c, i) => 
             {
@@ -43,50 +44,91 @@ namespace PocMaui.ViewModels
                 return sutomWordEntityWrapper; 
             });
 
-            Words.Add(firstWord);
+            Words.Add(new ObservableCollection<SutomWordEntityWrapper>(firstWord));
         }
 
-        public Command UserValidWordCommand { get; set; }
-        private async Task OnUserValidWordCommand()
+        public Command<string> KeyboardLetterPressedCommand { get; set; }
+        private async Task OnKeyboardLetterPressedCommand(string letter)
         {
 
-            if(Words.Count() >= _numberOfTry)
+            if (letter == "Delete")
             {
-                await App.Current.MainPage.DisplayAlert("...", $"You loose this game", "Ok");
+                var isFirstLetter = Words.LastOrDefault().Skip(1).FirstOrDefault(l => l.Value.ToString() != "\0") == null;
+
+                if (isFirstLetter)
+                    return;
+
+                Words.LastOrDefault().LastOrDefault(l => l.Value.ToString() != "\0").Value = "\0".ToCharArray()[0];
                 return;
             }
 
-            if (CorrectWord.Length != _userWord.Length)
-                return;
+            var lastWhiteLetter = Words.LastOrDefault().FirstOrDefault(l => l.Value.ToString() == "\0");
+            lastWhiteLetter.Value = letter.ToCharArray()[0];
 
-            var word = new List<SutomWordEntityWrapper>();
-
-
-            for (int i = 0; i < CorrectWord.Length; i++)
+            // If it's the last letter of the word
+            if (Words.LastOrDefault().FirstOrDefault(l => l.Value.ToString() == "\0") == null)
             {
-                // If the char is in correct place
-                if (_userWord[i] == CorrectWord[i])
-                    word.Add(new SutomWordEntityWrapper(_userWord[i]) { Status = 2 });
+                // Check response
+                CheckLastWord();
 
-                // If the char is not in correct place
-                else if (CorrectWord.Contains(_userWord[i]) && word.Where(w => w.Value == _userWord[i]).Count() < CorrectWord.Where(w => w == _userWord[i]).Count())
+                var isGameFinished = await CheckEndGame();
+
+                if (!isGameFinished)
                 {
-                    word.Add(new SutomWordEntityWrapper(_userWord[i]) { Status = 1 });
+                    // Add new line
+                    AddNewLine();
                 }
-                // If char is not in correct word
-                else
-                    word.Add(new SutomWordEntityWrapper(_userWord[i]));
             }
+        }
 
-            Words.Add(word);
-
-            if (CorrectWord == UserWord)
+        private async Task<bool> CheckEndGame()
+        {
+            // 1 Check if the user win
+            if (!Words.LastOrDefault().Any(l => l.Status != 2))
             {
-                await App.Current.MainPage.DisplayAlert("Good game", $"You win this game {Words.Count()}/{_numberOfTry}", "Ok");
-                return;
+                await App.Current.MainPage.DisplayAlert("GG", $"You win this game with the score : {Words.Count()}/{_numberOfTry}", "Ok");
+                return true;
             }
 
-            UserWord = "";
+            // 2 Check if user can't retry
+            if (Words.Count() >= _numberOfTry)
+            {
+                await App.Current.MainPage.DisplayAlert("...", $"You lose this game : {Words.Count()}/{_numberOfTry}", "Ok");
+                return true;
+            }
+
+            return false;
+        }
+
+        private void CheckLastWord()
+        {
+            var userWord = Words.LastOrDefault();
+
+            for (int i = 0; i < userWord.Count(); i++)
+            {
+                // If it's the correct answer
+                if (CorrectWord[i] == userWord[i].Value)
+                    userWord[i].Status = 2;
+                else if (CorrectWord.Contains(userWord[i].Value) && CorrectWord.Skip(1).Where(l => l == userWord[i].Value).Count() >= userWord.Skip(1).Where(l => l.Value == userWord[i].Value).Count())
+                    userWord[i].Status = 1;
+            }
+        }
+
+        private void AddNewLine()
+        {
+            var newWord = Words.LastOrDefault().Select((letter, i) =>
+            {
+                if (i >= 1)
+                {
+                    return new SutomWordEntityWrapper("\0".ToCharArray()[0]);
+                }
+                else
+                {
+                    return new SutomWordEntityWrapper(letter.Value) { Status = 2 };
+                }
+            });
+
+            Words.Add(new ObservableCollection<SutomWordEntityWrapper>(newWord));
         }
 
         #region Props
@@ -104,22 +146,9 @@ namespace PocMaui.ViewModels
         }
         #endregion
 
-        #region UserWord
-        private string _userWord;
-        public string UserWord
-        {
-            get => _userWord;
-            set
-            {
-                _userWord = value;
-                NotifyPropertyChanged(nameof(UserWord));
-            }
-        }
-        #endregion
-
         #region Words
-        private ObservableCollection<IEnumerable<SutomWordEntityWrapper>> _words;
-        public ObservableCollection<IEnumerable<SutomWordEntityWrapper>> Words
+        private ObservableCollection<ObservableCollection<SutomWordEntityWrapper>> _words;
+        public ObservableCollection<ObservableCollection<SutomWordEntityWrapper>> Words
         {
             get => _words;
             set
