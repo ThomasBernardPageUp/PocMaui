@@ -14,7 +14,7 @@ namespace PocMaui.ViewModels
     public class SutomViewModel : BaseViewModel
     {
         private readonly IWordService _wordService;
-        private int _numberOfTry = 7;
+        private int _numberOfTry = 6;
 
         public SutomViewModel(INavigation navigation):base(navigation)
         {
@@ -63,7 +63,8 @@ namespace PocMaui.ViewModels
             }
 
             var lastWhiteLetter = Words.LastOrDefault().FirstOrDefault(l => l.Value.ToString() == "\0");
-            lastWhiteLetter.Value = letter.ToCharArray()[0];
+            if (lastWhiteLetter != null)
+                lastWhiteLetter.Value = letter.ToCharArray()[0];
 
             // If it's the last letter of the word
             if (Words.LastOrDefault().FirstOrDefault(l => l.Value.ToString() == "\0") == null)
@@ -89,7 +90,7 @@ namespace PocMaui.ViewModels
                 await App.Current.MainPage.DisplayAlert("GG", $"You win this game with the score : {Words.Count()}/{_numberOfTry}", "Ok");
                 return true;
             }
-
+            
             // 2 Check if user can't retry
             if (Words.Count() >= _numberOfTry)
             {
