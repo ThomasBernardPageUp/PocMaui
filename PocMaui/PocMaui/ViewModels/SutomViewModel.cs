@@ -15,6 +15,7 @@ namespace PocMaui.ViewModels
     {
         private readonly IWordService _wordService;
         private int _numberOfTry = 6;
+        private bool _isGameFinished;
 
         public SutomViewModel(INavigation navigation):base(navigation)
         {
@@ -50,6 +51,8 @@ namespace PocMaui.ViewModels
         public Command<string> KeyboardLetterPressedCommand { get; set; }
         private async Task OnKeyboardLetterPressedCommand(string letter)
         {
+            if (_isGameFinished)
+                return;
 
             if (letter == "Delete")
             {
@@ -72,9 +75,9 @@ namespace PocMaui.ViewModels
                 // Check response
                 CheckLastWord();
 
-                var isGameFinished = await CheckEndGame();
+                _isGameFinished = await CheckEndGame();
 
-                if (!isGameFinished)
+                if (!_isGameFinished)
                 {
                     // Add new line
                     AddNewLine();
