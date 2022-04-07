@@ -10,6 +10,13 @@
                 <Setter Property="FontFamily" Value="OpenSansRegular" />
             </Style>
 
+            <Style TargetType="Button" x:Key="KeyboardButton">
+                <Setter Property="WidthRequest" Value="30"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

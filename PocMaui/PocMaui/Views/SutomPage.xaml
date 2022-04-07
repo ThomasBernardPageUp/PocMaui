@@ -57,41 +57,38 @@
         </StackLayout>-->
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="A" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="A"/>
-            <Button Text="B" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="B"/>
-            <Button Text="C" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="C"/>
-            <Button Text="D" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="D"/>
-            <Button Text="E" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="E"/>
-            <Button Text="F" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="F"/>
-            <Button Text="G" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="G"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="A" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="A"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="Z" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Z"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="E" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="E"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="R" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="R"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="T" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="T"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="Y" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Y"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="U" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="U"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="I" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="I"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="O" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="O"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="P" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="P"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="H" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="H"/>
-            <Button Text="I" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="I"/>
-            <Button Text="J" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="J"/>
-            <Button Text="K" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="K"/>
-            <Button Text="L" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="L"/>
-            <Button Text="M" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="M"/>
-            <Button Text="N" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="N"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="Q" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Q"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="S" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="S"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="D" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="D"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="F" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="F"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="G" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="G"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="H" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="H"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="J" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="J"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="K" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="K"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="L" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="L"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="M" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="M"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="O" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="O"/>
-            <Button Text="P" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="P"/>
-            <Button Text="Q" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Q"/>
-            <Button Text="R" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="R"/>
-            <Button Text="S" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="S"/>
-            <Button Text="T" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="T"/>
-            <Button Text="U" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="U"/>
-        </StackLayout>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="V" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="V"/>
-            <Button Text="W" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="W"/>
-            <Button Text="X" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="X"/>
-            <Button Text="Y" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Y"/>
-            <Button Text="Z" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Z"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="W" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="W"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="X" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="X"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="C" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="C"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="V" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="V"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="B" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="B"/>
+            <Button Style="{StaticResource Key=KeyboardButton}" Text="N" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="N"/>
             <Button Text="Delete" Margin="3" Command="{Binding KeyboardLetterPressedCommand}" CommandParameter="Delete"/>
         </StackLayout>
     </StackLayout>
