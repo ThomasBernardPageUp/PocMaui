@@ -31,7 +31,6 @@ namespace PocMaui.ViewModels
             // Generate the word
             var correctWord = await _wordService.GetRandomWord(); 
             CorrectWord = _wordService.NormalizeString(correctWord);
-            CorrectWord = "Pompier";
 
             var firstWord = CorrectWord.Select((c, i) => 
             {
